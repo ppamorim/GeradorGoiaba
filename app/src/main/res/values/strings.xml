@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="developer"><b>Pedro Paulo de Amorim</b></string>
+    <string name="github_link">https://github.com/ppamorim/GeradorGoiaba</string>
+
+    <string name="app_name">Gerador de Goiaba</string>
+    <string name="change_multipler">Escolha quantas vezes você quer que a goiaba a 1,50 apareça no texto:</string>
+    <string name="generate">GERAR GOIABA</string>
+    <string name="ok">OK</string>
+    <string name="omg">chegai mano</string>
+    <string name="click_cat">Clique nesse gatinho lindo e sexy para abrir o link do repositório!</string>
+    <string name="wtf">Sim, isso é um projeto open source! OMG! \nDesenvolvido em um dia por:</string>
+    <string name="warning_slider">Por favor, escolha uma quantidade de goiabas.</string>
+    <string name="goiaba">La nas quebrada onde eu moro, mano, tem um ponto de onibus e um vendedor de goiaba, né. E ai um dia eu tive 1,50 ali, eu tava morrendo de fome, eu fiquei pensando: caraca vei, será que eu pego o ônibus ou será que eu compro uma goiaba né. Ai eu comprei uma goiaba e bixo comeu a goiaba suculenta, era uma goiaba gigante, assim eu tava morrendo de fome bixo a hora que eu fui morder aquela goiaba, ai dois maluco ali na frente me chamaram, falaram chegai chegai chegai mano, chegai. Ai eu falei qualé que foi bixo, ai o cara tasco a mão na minha goiaba o bixo pegou minha goiaba, ai eu falei caralho mano, se pegou minha goiaba. Ai o cara falou: é, jaera a goiaba a goiaba ai, mano, jaera a goiaba ai, pegou mordeu minha goiaba eu falei: uai, se mordeu minha goiaba o cara depois me deu e jaera.</string>
+    <string name="license">
+
+    Copyright 2014 Pedro Paulo de Amorim\n\n
+
+    Licensed under the Apache License, Version 2.0 (the "License");\n
+    you may not use this file except in compliance with the License.\n
+    You may obtain a copy of the License at\n\n
+
+    http://www.apache.org/licenses/LICENSE-2.0\n\n
+
+    Unless required by applicable law or agreed to in writing, software\n
+    distributed under the License is distributed on an "AS IS" BASIS,\n
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n
+    See the License for the specific language governing permissions and\n
+    limitations under the License.
+    </string>
+
+</resources>
