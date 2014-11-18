@@ -92,7 +92,7 @@ public class Switch extends CustomView {
                     isLastTouch = false;
                     press = false;
                 }
-            } else if (event.getAction() == MotionEvent.ACTION_UP) {
+            } else if (event.getAction() == MotionEvent.ACTION_UP || event.getAction() == MotionEvent.ACTION_CANCEL || event.getAction() == MotionEvent.ACTION_OUTSIDE) {
                 press = false;
                 isLastTouch = false;
                 if (eventCheck != check) {

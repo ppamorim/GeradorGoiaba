@@ -9,23 +9,37 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="16dp">
+        android:layout_height="wrap_content">
 
         <TextView
+            android:id="@+id/text_active_song"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/active_song"
             android:textColor="@color/white"
             android:textSize="16sp"
-            android:padding="16dp"/>
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
+            android:paddingLeft="16dp"
+            android:paddingStart="16dp"/>
 
         <com.goiaba.goiabas.geradorgoiaba.view.Switch
             android:id="@+id/active_song"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/white"/>
+            android:background="@color/white"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"/>
 
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/text_more"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/more_options"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:padding="16dp"/>
 
 </LinearLayout>

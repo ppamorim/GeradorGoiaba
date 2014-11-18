@@ -16,6 +16,7 @@
         android:background="@color/bittersweet">
 
         <TextView
+            android:id="@+id/open_source"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/wtf"
@@ -24,6 +25,7 @@
             android:padding="16dp"/>
 
         <TextView
+            android:id="@+id/dev"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/white"
@@ -38,12 +40,14 @@
             android:layout_height="wrap_content">
 
             <ImageView
+                android:id="@+id/image"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:src="@drawable/github"
                 android:layout_margin="16dp"/>
 
             <TextView
+                android:id="@+id/text_image"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="@string/click_cat"
@@ -55,6 +59,7 @@
             </LinearLayout>
 
         <TextView
+            android:id="@+id/copiraiguete"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/license"

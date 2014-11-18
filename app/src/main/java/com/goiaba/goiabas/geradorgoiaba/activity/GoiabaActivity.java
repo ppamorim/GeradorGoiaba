@@ -30,7 +30,6 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.WindowManager;
 import android.view.animation.AnticipateOvershootInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.RelativeLayout;
@@ -40,9 +39,13 @@ import android.widget.TextView;
 import com.andexert.library.RippleView;
 import com.goiaba.goiabas.geradorgoiaba.R;
 import com.goiaba.goiabas.geradorgoiaba.service.MusicService;
+import com.goiaba.goiabas.geradorgoiaba.utils.AnimationUtils;
 import com.goiaba.goiabas.geradorgoiaba.utils.DebugUtil;
+import com.goiaba.goiabas.geradorgoiaba.utils.ViewUtil;
 import com.goiaba.goiabas.geradorgoiaba.view.Slider;
 import com.nineoldandroids.view.ViewHelper;
+
+import java.util.ArrayList;
 
 import static com.nineoldandroids.view.ViewPropertyAnimator.animate;
 
@@ -60,9 +63,11 @@ public class GoiabaActivity extends ActionBarActivity {
     //Verify if service is running
     private boolean mMusicBound = false;
     private float mContainerPosition;
+    private int mScreenHeight;
     private String mBaseText;
 
     private Slider mSlider;
+    private TextView mWelcomeText;
     private TextView mCopyText;
     private RippleView mGenerate;
     private RelativeLayout mLogoImage;
@@ -76,12 +81,15 @@ public class GoiabaActivity extends ActionBarActivity {
     private Drawable mPauseDrawable;
     private Drawable mPlayDrawable;
 
+    private Handler mHandler = new Handler();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_goiaba);
 
         mSlider = (Slider) findViewById(R.id.slider);
+        mWelcomeText = (TextView) findViewById(R.id.welcome_text);
         mCopyText = (TextView) findViewById(R.id.copy_text);
         mGenerate = (RippleView) findViewById(R.id.generate);
         mLogoImage = (RelativeLayout) findViewById(R.id.container_logo);
@@ -93,8 +101,40 @@ public class GoiabaActivity extends ActionBarActivity {
         mPauseDrawable = resources.getDrawable(R.drawable.ic_pause_circle_outline_white_48dp);
         mPlayDrawable = resources.getDrawable(R.drawable.ic_play_circle_outline_white_48dp);
 
+        ViewUtil viewUtil = new ViewUtil(this);
+
+        mScreenHeight = viewUtil.getScreenHeight();
+        int mScreenWidth = viewUtil.getScreenWidth();
+
         mContainerPosition = ViewHelper.getY(mContainerText);
-        ViewHelper.setY(mContainerText, getScreenSize());
+        ViewHelper.setY(mContainerText, mScreenHeight);
+
+        ViewHelper.setX(mWelcomeText, mScreenWidth);
+        ViewHelper.setX(mSlider, mScreenWidth);
+        ViewHelper.setX(mCopyText, mScreenWidth);
+        ViewHelper.setX(mGenerate, mScreenWidth);
+        ViewHelper.setX(mLogoImage, mScreenWidth);
+
+        ArrayList<View> mViews = new ArrayList<View>();
+        mViews.add(mWelcomeText);
+        mViews.add(mSlider);
+        mViews.add(mCopyText);
+        mViews.add(mGenerate);
+        mViews.add(mLogoImage);
+
+        int delay = 100;
+
+        for(final View view : mViews) {
+
+            mHandler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    startAnimation(view);
+                }
+            }, delay);
+            delay += 100;
+        }
+
     }
 
     @Override
@@ -110,6 +150,17 @@ public class GoiabaActivity extends ActionBarActivity {
             }
         } else {
             DebugUtil.log("mMenuItem null");
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(!getSharedPreferences(PREFS_CONFIG, MODE_PRIVATE)
+                .getBoolean(GoiabaActivity.PREFS_SONG, true)
+                && mMenuItem != null && mMusicService != null && mMusicService.isSongPlaying()) {
+            mMenuItem.setIcon(mPlayDrawable);
+            mMusicService.pauseSong();
         }
     }
 
@@ -217,24 +268,32 @@ public class GoiabaActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    private void startAnimation(View view) {
+        AnimationUtils.animateView(view);
+    }
+
     private void toggleIcon(MenuItem item, boolean isToPlay, boolean isToReset) {
-        if (isToPlay) {
-            item.setIcon(mPauseDrawable);
-            mMusicService.playSong(isToReset);
-        } else {
-            item.setIcon(mPlayDrawable);
-            mMusicService.pauseSong();
+        if(songIsEnabled()) {
+            if (isToPlay) {
+                item.setIcon(mPauseDrawable);
+                mMusicService.playSong(isToReset);
+            } else {
+                item.setIcon(mPlayDrawable);
+                mMusicService.pauseSong();
+            }
         }
+    }
+
+    public boolean songIsEnabled() {
+        return getSharedPreferences(PREFS_CONFIG, MODE_PRIVATE).getBoolean(PREFS_SONG, true);
     }
 
     private View.OnClickListener onGenerateClick = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
 
-            if(mMusicService != null) {
+            if(mMusicService != null && songIsEnabled()) {
                 toggleIcon(mMenuItem, true, true);
-            } else {
-                DebugUtil.log("mMusicService is null");
             }
 
             StringBuilder text = new StringBuilder("");
@@ -255,7 +314,7 @@ public class GoiabaActivity extends ActionBarActivity {
                         .setInterpolator(new AnticipateOvershootInterpolator(1))
                         .alpha(0)
                         .setDuration(2000)
-                        .translationY(getScreenSize())
+                        .translationY(mScreenHeight)
                         .start();
                 new Handler().postDelayed(new Runnable() {
                     @Override
@@ -265,7 +324,7 @@ public class GoiabaActivity extends ActionBarActivity {
                         animate(mContainerText)
                                 .setInterpolator(new DecelerateInterpolator(10))
                                 .setDuration(5000)
-//                                .alpha(100)
+                                .alpha(100)
                                 .translationY(0)
                                 .start();
                         mLogoImage.setVisibility(View.GONE);
@@ -302,11 +361,4 @@ public class GoiabaActivity extends ActionBarActivity {
         }
     };
 
-    public int getScreenSize() {
-        int screenWidth = getResources().getDisplayMetrics().heightPixels;
-        if(android.os.Build.VERSION.SDK_INT >= 13) {
-            screenWidth = ((WindowManager) getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getHeight();
-        }
-        return screenWidth;
-    }
 }
