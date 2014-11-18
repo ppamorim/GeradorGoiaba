@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.goiaba.goiabas.geradorgoiaba" >
 
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -18,6 +20,9 @@
         </activity>
 
         <activity android:name=".activity.AboutActivity"/>
+        <activity android:name=".activity.ConfigActivity"/>
+
+        <service android:name=".service.MusicService" />
     </application>
 
 </manifest>

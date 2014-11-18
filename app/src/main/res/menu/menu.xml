@@ -5,4 +5,11 @@
     <item android:id="@+id/about"
         android:title="@string/omg"
         app:showAsAction="never" />
+
+    <item android:id="@+id/config"
+        android:title="@string/config"
+        app:showAsAction="never" />
+
+    <item android:id="@+id/controller"
+        app:showAsAction="ifRoom" />
 </menu>

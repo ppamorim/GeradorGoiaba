@@ -3,7 +3,7 @@
     <item
         android:id="@+id/shape_bacground">
         <shape android:shape="oval" >
-            <solid android:color="@color/green"/>
+            <solid android:color="@color/bittersweet"/>
         </shape>
     </item>
 

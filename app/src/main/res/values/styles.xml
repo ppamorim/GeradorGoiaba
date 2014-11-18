@@ -10,8 +10,11 @@
         <item name="android:actionMenuTextColor">@color/white</item>
         <item name="android:windowNoTitle">true</item>
         <item name="windowActionBar">true</item>
+        <item name="android:windowBackground">@color/bittersweet</item>
         <item name="android:windowContentOverlay">@null</item>
         <item name="dropDownListViewStyle">@style/SpinnerDropdown</item>
+        <item name="android:actionBarItemBackground">@drawable/background_actionbar_item</item>
+        <item name="actionBarItemBackground">@drawable/background_actionbar_item</item>
     </style>
 
     <style name="AppThemeNoBar" parent="AppTheme">
@@ -22,7 +25,7 @@
 
     <style name="SpinnerDropdown" parent="android:style/Widget.ListView.DropDown">
         <item name="android:background">@color/bittersweet</item>
-        <item name="android:divider">@color/black</item>
+        <item name="android:divider">@color/white</item>
         <item name="android:listSelector">@color/green</item>
         <item name="android:dividerHeight">1dp</item>
     </style>

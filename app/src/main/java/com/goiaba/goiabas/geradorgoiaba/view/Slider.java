@@ -9,8 +9,6 @@ import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Xfermode;
-import android.graphics.drawable.GradientDrawable;
-import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
 import android.util.AttributeSet;
 import android.view.Gravity;
@@ -20,10 +18,9 @@ import android.view.Window;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.nineoldandroids.view.ViewHelper;
-
 import com.goiaba.goiabas.geradorgoiaba.R;
 import com.goiaba.goiabas.geradorgoiaba.utils.Utils;
+import com.nineoldandroids.view.ViewHelper;
 
 public class Slider extends CustomView {
 
@@ -162,8 +159,7 @@ public class Slider extends CustomView {
 				if (numberIndicator != null
 						&& numberIndicator.isShowing() == false)
 					numberIndicator.show();
-				if ((event.getX() <= getWidth() && event.getX() >= 0)
-						&& (event.getY() <= getHeight() && event.getY() >= 0)) {
+				if ((event.getX() <= getWidth() && event.getX() >= 0)) {
 					press = true;
 					// calculate value
 					int newValue = 0;
@@ -317,19 +313,11 @@ public class Slider extends CustomView {
 
 		public Ball(Context context) {
 			super(context);
-			setBackgroundResource(R.drawable.background_switch_ball_uncheck);
+			setBackgroundResource(R.drawable.background_seekbar_uncheck);
 		}
 
 		public void changeBackground() {
-			if (value != min) {
-				setBackgroundResource(R.drawable.background_checkbox);
-				LayerDrawable layer = (LayerDrawable) getBackground();
-				GradientDrawable shape = (GradientDrawable) layer
-						.findDrawableByLayerId(R.id.shape_bacground);
-				shape.setColor(backgroundColor);
-			} else {
-				setBackgroundResource(R.drawable.background_switch_ball_uncheck);
-			}
+            setBackgroundResource(R.drawable.background_seekbar_uncheck);
 		}
 
 	}

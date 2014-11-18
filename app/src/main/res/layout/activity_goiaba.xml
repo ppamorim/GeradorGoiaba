@@ -20,7 +20,7 @@
         android:padding="@dimen/padding"
         android:background="@color/bittersweet"
         materialdesign:max="100"
-        materialdesign:min="0"
+        materialdesign:min="1"
         materialdesign:showNumberIndicator="true"/>
 
     <com.andexert.library.RippleView
